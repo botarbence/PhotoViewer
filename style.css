@@ -1,0 +1,96 @@
+body {
+  background-color: cornflowerblue;
+  text-align: center;
+}
+
+#main {
+  width: 80%;
+  margin: auto;
+}
+
+/* Carousel */
+#carousel {
+  margin-top: 20px;
+  height: 500px;
+  position: relative;
+  box-shadow: 5px 5px 8px 0 black;
+}
+.carouselitem {
+  height: 500px;
+  padding: 0 60px;
+}
+.carouselbox {
+  height: 500px;
+  position: relative;
+  overflow: hidden;
+}
+.carouselimg {
+  width: 100%;
+  
+  margin: -50px 0 -50px 0;
+}
+.description-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+}
+
+/* Arrows */
+.arrow {
+  position: absolute;
+  background-color: rgb(35, 99, 219);
+  top:0;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 30px;
+}
+.left {
+  left:0;
+}
+.right {
+  right: 0;
+}
+#rightarrow {
+  transform: rotate(180deg);
+}
+
+/* Thumbnail */
+#thumbnail {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+.thumbnailbox {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  background-color: grey;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  border: 2px solid rgb(201, 197, 197);
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 0 black;
+}
+.thumbnailboxselected {
+  border-color: rgb(233, 228, 228) ;
+  box-shadow: 5px 5px 8px 0 black;
+}
+.thumbnailimage {
+  width:100%;
+}
+
+.hover{
+  position: absolute;
+  background-color: black;
+  color: white;
+  font-size: 1rem;
+  opacity: 1;
+  width: 150px;
+  top: -40px;
+  left: -50px;
+}
