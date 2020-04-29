@@ -69,19 +69,23 @@ body {
   width: 50px;
   height: 50px;
   background-color: grey;
-  margin: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
   display: flex;
   align-items: center;
-  border: 2px solid rgb(201, 197, 197);
+  border: 3px solid rgb(201, 197, 197);
   border-radius: 10px;
   box-shadow: 3px 3px 5px 0 black;
+  
 }
 .thumbnailboxselected {
   border-color: rgb(233, 228, 228) ;
   box-shadow: 5px 5px 8px 0 black;
 }
 .thumbnailimage {
-  width:100%;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .hover{
@@ -93,4 +97,6 @@ body {
   width: 150px;
   top: -40px;
   left: -50px;
+  border-radius: 5px;
+  box-shadow: 5px 5px 8px 0 black;
 }

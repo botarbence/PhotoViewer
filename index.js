@@ -1,18 +1,28 @@
 
 let photoData =[ {
-  image: "images/beach_resort_sunset-1920x1200.jpg",
-  title: "title",
-  description: "descipton"
+    image: "images/beach_resort_sunset-1920x1200.jpg",
+    title: "Rsort Sunset",
+    description: "desciptongfcfc"
   },
   {
     image: "images/bicycle-1920x1200.jpg",
-  title: "title2",
-  description: "descipton2"
+    title: "Bicycle",
+    description: "desciptonvzxcvxv2"
   },
   {
     image: "images/moraine_lake_banff_national_park-1920x1200.jpg",
-    title: "title3",
+    title: "Maroiane Lake",
     description: "descipton3"
+  },
+  {
+    image: "images/autumn_breeze-1920x1200.jpg",
+    title: "Autumn Breeze",
+    description: "dsfasdffgfdgdfgdfgfg"
+  },
+  {
+    image:"images/paris_eiffel_tower-1920x1200.jpg",
+    title: "Eiffel Tower",
+    description: "fgsdfgdfgdgd"
   }
 ]
 
