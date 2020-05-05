@@ -1,7 +1,7 @@
 
 let photoData =[ {
     image: "images/beach_resort_sunset-1920x1200.jpg",
-    title: "Rsort Sunset",
+    title: "Resort Sunset",
     description: "desciptongfcfc"
   },
   {
@@ -38,16 +38,32 @@ $(document).ready(function(){
 $("#photo").attr("src", photoData[photoNumber].image);
 $("#photo-title").text(photoData[photoNumber].title);
 $("#photo-description").text(photoData[photoNumber].description);
-
-
+$("#leftthumbnail").attr("src", photoData[photoData.length-1].image);
+$("#mainthumbnail").attr("src", photoData[photoNumber].image);
+$("#rightthumbnail").attr("src", photoData[photoNumber+1].image);
 
 // Photo loading function
 function loadPhoto(photoNumber) {
   $("#photo").attr("src", photoData[photoNumber].image);
   $("#photo-title").text(photoData[photoNumber].title);
   $("#photo-description").text(photoData[photoNumber].description);
-  $(".thumbnailbox").removeClass("thumbnailboxselected");
-  $(".thumbnailbox[data-number=" + photoNumber + "]").addClass("thumbnailboxselected");
+  
+  $("#mainthumbnail").attr("src", photoData[photoNumber].image);
+
+  if (photoNumber==photoData.length-1) {
+    $("#rightthumbnail").attr("src", photoData[0].image);
+  } else {
+    $("#rightthumbnail").attr("src", photoData[photoNumber+1].image);
+  }
+
+  if (photoNumber==0) {
+    $("#leftthumbnail").attr("src", photoData[photoData.length-1].image);
+  } else {
+    $("#leftthumbnail").attr("src", photoData[photoNumber-1].image);
+  }
+  
+  
+  
 };
 
 // Loading left
@@ -89,13 +105,12 @@ $(document).on("keydown", (event)=>{
 });
 
 // Adding thumbnails
-
+var thumbnailArray = [];
 for (var i=0; i<photoData.length; i++) {
-  $("#thumbnail").append($("<div>").attr("data-number", i).addClass("thumbnailbox")
-    .append($("<img>").attr("src", photoData[i].image).addClass("thumbnailimage"))
-    );
-};
-$(".thumbnailbox[data-number=" + photoNumber + "]").addClass("thumbnailboxselected");
+
+
+}
+
 
 //Control with thumbnails
 $(".thumbnailimage").on("click", (event)=>{
