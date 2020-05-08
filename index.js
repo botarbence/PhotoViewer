@@ -26,7 +26,7 @@ let photoData =[ {
   }
 ]
 
-let photoNumber = 0;
+let thumbNailArr = [0,1,2,3,4]
 
 $(document).ready(function(){
   $("*").dblclick(function(e){
@@ -35,58 +35,68 @@ $(document).ready(function(){
 });
 
 // Basic image
-$("#photo").attr("src", photoData[photoNumber].image);
-$("#photo-title").text(photoData[photoNumber].title);
-$("#photo-description").text(photoData[photoNumber].description);
-$("#leftthumbnail").attr("src", photoData[photoData.length-1].image);
-$("#mainthumbnail").attr("src", photoData[photoNumber].image);
-$("#rightthumbnail").attr("src", photoData[photoNumber+1].image);
+loadPhoto(thumbNailArr[2]);
+for (let i=0; i<5; i++){
+  thumbNailCreateRight(i);
+  if (i==0 || i==4) {
+    $(".thumbNailImage[data-number=" + i + "]").css({"left": (i*75) + "px", "opacity": 0});
+  } else {
+    $(".thumbNailImage[data-number=" + i + "]").css("left", (i*75) + "px");
+  }
+};
+
+// Thumbnail Creation
+function thumbNailCreateRight(imageNumber){
+  $("#thumbnailcontainer").append($("<img>").attr({"data-number": imageNumber, "src": photoData[imageNumber].image}).addClass("thumbNailImage"));
+};
+function thumbNailCreateLeft(imageNumber){
+  $("#thumbnailcontainer").prepend($("<img>").attr({"data-number": imageNumber, "src": photoData[imageNumber].image}).addClass("thumbNailImage"));
+}
+function thumbNailRemove(imageNumber){
+  $(".thumbNailImage[data-number=" + imageNumber + "]").remove();
+}
 
 // Photo loading function
 function loadPhoto(photoNumber) {
   $("#photo").attr("src", photoData[photoNumber].image);
   $("#photo-title").text(photoData[photoNumber].title);
   $("#photo-description").text(photoData[photoNumber].description);
-  
-  $("#mainthumbnail").attr("src", photoData[photoNumber].image);
-
-  if (photoNumber==photoData.length-1) {
-    $("#rightthumbnail").attr("src", photoData[0].image);
-  } else {
-    $("#rightthumbnail").attr("src", photoData[photoNumber+1].image);
-  }
-
-  if (photoNumber==0) {
-    $("#leftthumbnail").attr("src", photoData[photoData.length-1].image);
-  } else {
-    $("#leftthumbnail").attr("src", photoData[photoNumber-1].image);
-  }
-  
-  
-  
+    
 };
 
 // Loading left
 function leftSlide(){
-  if (photoNumber>0){
-    photoNumber--;
-    loadPhoto(photoNumber);
-  } else {
-    photoNumber = photoData.length-1;
-    loadPhoto(photoNumber);
-  };
+  thumbNailRemove(thumbNailArr[4]);
+  if (thumbNailArr[0]==0){
+    thumbNailArr.unshift(photoData.length-1);
+  } else thumbNailArr.unshift(thumbNailArr[0]-1);
+  thumbNailArr.pop();
+  thumbNailCreateLeft(thumbNailArr[0]);
+  $(".thumbNailImage[data-number=" + thumbNailArr[0] + "]").css({"left": "0px", "opacity": 0});
+  $(".thumbNailImage[data-number=" + thumbNailArr[1] + "]").animate({left: "+=75px"}, { duration: 200, queue: false }).css("opacity", 1);
+  $(".thumbNailImage[data-number=" + thumbNailArr[2] + "]").animate({left: "+=75px"}, { duration: 200, queue: false });
+  $(".thumbNailImage[data-number=" + thumbNailArr[3] + "]").animate({left: "+=75px"}, { duration: 200, queue: false });
+  $(".thumbNailImage[data-number=" + thumbNailArr[4] + "]").animate({left: "+=75px"}, { duration: 200, queue: false }).css("opacity", 0);
+  loadPhoto(thumbNailArr[2]);
+  console.log(thumbNailArr);
 };
 
 
 // Loading right
 function rightSlide() {
-  if (photoNumber<photoData.length-1){
-    photoNumber++;
-    loadPhoto(photoNumber);
-  } else {
-    photoNumber = 0;
-    loadPhoto(photoNumber);
-  };
+  thumbNailRemove(thumbNailArr[0]);
+  if (thumbNailArr[4]==photoData.length-1){
+    thumbNailArr.push(0);
+  } else thumbNailArr.push(thumbNailArr[4]+1);
+  thumbNailArr.shift();
+  thumbNailCreateRight(thumbNailArr[4]);
+  $(".thumbNailImage[data-number=" + thumbNailArr[4] + "]").css({"left": "300px", "opacity": 0});
+  $(".thumbNailImage[data-number=" + thumbNailArr[3] + "]").animate({left: "-=75px"}, { duration: 200, queue: false }).css("opacity", 1);
+  $(".thumbNailImage[data-number=" + thumbNailArr[2] + "]").animate({left: "-=75px"}, { duration: 200, queue: false });
+  $(".thumbNailImage[data-number=" + thumbNailArr[1] + "]").animate({left: "-=75px"}, { duration: 200, queue: false });
+  $(".thumbNailImage[data-number=" + thumbNailArr[0] + "]").animate({left: "-=75px"}, { duration: 200, queue: false }).css("opacity", 0);
+  loadPhoto(thumbNailArr[2]);
+  console.log(thumbNailArr);
 };
 
 
@@ -104,23 +114,14 @@ $(document).on("keydown", (event)=>{
   };
 });
 
-// Adding thumbnails
-var thumbnailArray = [];
-for (var i=0; i<photoData.length; i++) {
-
-
-}
-
-
 //Control with thumbnails
-$(".thumbnailimage").on("click", (event)=>{
+$(".thumbNailImage").on("click", (event)=>{
   loadPhoto($(event.target).parent().attr("data-number"));
 });
 
 
 // Hover
-
-$(".thumbnailimage").hover(function(event) {
+$(".thumbNailImage").hover(function(event) {
   $(event.target).parent()
     .append($("<h3>").text(photoData[$(event.target).parent().data("number")].title).addClass("hover"));
     $("h3").hide().fadeIn()},
@@ -128,7 +129,6 @@ $(".thumbnailimage").hover(function(event) {
     $("h3").fadeOut("normal", function(){
       $(this).remove();
     });
-    
 });
   
 
